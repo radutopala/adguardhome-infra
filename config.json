@@ -1,0 +1,17 @@
+{
+    "server": {
+        "name": "prod", 
+        "ip": "192.168.0.1",
+        "user": "root"
+    }, 
+    "adguardhome": {
+        "auth": {
+            "user": "admin",
+            "password": "admin"
+        }, 
+        "user_rules": ["||tp-link.com^$important"]
+    }, 
+    "caddy": {
+        "domain": "dns.example.com"
+    }
+}
