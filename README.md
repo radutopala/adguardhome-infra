@@ -52,6 +52,15 @@ Recommended is to setup the router's DNS, using the `server.ip`. You should be u
 
 ---
 
+## AdGuardHome Update
+
+You can easily update your AdGuardHome instance to the latest version by running: 
+```
+./main.go provision:adguardhome --update
+```
+
+---
+
 ## Mac on Dev
 In case you want to test locally first on your Mac:
 ```

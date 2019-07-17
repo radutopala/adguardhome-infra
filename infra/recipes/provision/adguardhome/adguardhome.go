@@ -6,9 +6,21 @@ import (
 )
 
 func init() {
+	updateOpt := exec.NewOption("update", "Update the binary now")
+	updateOpt.Type = exec.Bool
+	updateOpt.Default = false
+
 	exec.
 		Task("provision:adguardhome", func() {
-			exec.RunIf("[ ! -e \"`which ~/adguardhome/bin/adguardhome`\" ]", []string{
+			var condition string
+
+			if exec.TaskContext.GetOption("update").Bool() {
+				condition = "[ true ]"
+			} else {
+				condition = "[ ! -e \"`which ~/adguardhome/bin/adguardhome`\" ]"
+			}
+
+			exec.RunIf(condition, []string{
 				"mkdir ~/adguardhome",
 				"mkdir ~/adguardhome/bin/",
 				"mkdir ~/adguardhome/log/",
@@ -30,6 +42,7 @@ func init() {
 				"sudo supervisorctl update; sudo supervisorctl restart all; sudo supervisorctl status; else sudo service supervisor start; sudo supervisorctl status",
 			)
 		}).
+		AddOption(updateOpt).
 		OnServers(func() []string {
 			return infra.GetServers()
 		})
