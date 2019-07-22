@@ -20,7 +20,9 @@ dns:
   - 1.1.1.1:53
   all_servers: false
   allowed_clients: []
-  disallowed_clients: []
+  disallowed_clients: {{ if .disallowed_clients }}{{range .disallowed_clients}}
+  - '{{.}}'
+  {{end}}{{else}}[]{{end}}
   blocked_hosts: []
   parental_sensitivity: 13
   parental_enabled: true

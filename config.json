@@ -9,7 +9,8 @@
             "user": "admin",
             "password": "admin"
         }, 
-        "user_rules": ["||tp-link.com^$important"]
+        "user_rules": ["||tp-link.com^$important"],
+        "disallowed_clients": []
     }, 
     "caddy": {
         "domain": "dns.example.com"
